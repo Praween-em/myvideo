@@ -5,55 +5,38 @@
   <title>My Profile Video</title>
   <style>
     body {
+      margin: 0;
+      background: #000;
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
-      background: #111;
-      margin: 0;
-      color: white;
-      font-family: sans-serif;
-      flex-direction: column;
     }
     video {
-      max-width: 90%;
-      border: 3px solid white;
-      border-radius: 12px;
-      display: none;
-    }
-    button {
-      padding: 10px 20px;
-      font-size: 18px;
-      border: none;
-      border-radius: 8px;
-      background: #0078ff;
-      color: white;
-      cursor: pointer;
+      max-width: 100%;
+      height: auto;
     }
   </style>
 </head>
 <body>
-  <button id="playBtn">▶ Play My Video with Sound</button>
-  <video id="myVideo" playsinline>
+  <video id="myVideo" autoplay playsinline>
     <source src="Character_Speaks_Praveen_Kumar_s_Dialogue.mp4" type="video/mp4">
     Your browser does not support video.
   </video>
 
   <script>
     const video = document.getElementById("myVideo");
-    const playBtn = document.getElementById("playBtn");
 
-    playBtn.addEventListener("click", () => {
-      playBtn.style.display = "none";   // hide button
-      video.style.display = "block";    // show video
-      video.play();
+    // Try to force unmute after autoplay starts
+    video.muted = false;
+    video.play().catch(err => {
+      console.log("Autoplay with sound blocked by browser:", err);
     });
 
+    // Pause at the end
     video.addEventListener("ended", () => {
-      video.pause(); // ensures no replay
+      video.pause();
     });
   </script>
 </body>
 </html>
-
-
