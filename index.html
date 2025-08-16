@@ -11,6 +11,7 @@
       justify-content: center;
       align-items: center;
       height: 100vh;
+      cursor: pointer; /* show clickable hint */
     }
     video {
       max-width: 100%;
@@ -19,7 +20,7 @@
   </style>
 </head>
 <body>
-  <video id="myVideo" autoplay playsinline>
+  <video id="myVideo" playsinline>
     <source src="Character_Speaks_Praveen_Kumar_s_Dialogue.mp4" type="video/mp4">
     Your browser does not support video.
   </video>
@@ -27,13 +28,22 @@
   <script>
     const video = document.getElementById("myVideo");
 
-    // Try to force unmute after autoplay starts
+    // Try autoplay with sound
     video.muted = false;
-    video.play().catch(err => {
-      console.log("Autoplay with sound blocked by browser:", err);
+    video.play().then(() => {
+      console.log("Video playing with sound ✅");
+    }).catch(() => {
+      console.log("Autoplay with sound blocked ❌ — waiting for user click");
     });
 
-    // Pause at the end
+    // If user clicks anywhere, play with sound
+    document.body.addEventListener("click", () => {
+      if (video.paused) {
+        video.play();
+      }
+    });
+
+    // Pause after one play
     video.addEventListener("ended", () => {
       video.pause();
     });
