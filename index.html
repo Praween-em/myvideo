@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Profile Video</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: #000;
+      margin: 0;
+    }
+    video {
+      max-width: 90%;
+      border: 3px solid white;
+      border-radius: 12px;
+    }
+  </style>
+</head>
+<body>
+  <video id="myVideo" autoplay>
+    <source src="Untitled_design(1).mp4" type="video/mp4">
+    Your browser does not support video.
+  </video>
+
+  <script>
+    const video = document.getElementById("myVideo");
+    video.addEventListener("ended", () => {
+      video.pause(); // stops after first play
+    });
+  </script>
+</body>
+</html>
