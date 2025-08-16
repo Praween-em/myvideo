@@ -11,28 +11,49 @@
       height: 100vh;
       background: #111;
       margin: 0;
+      color: white;
+      font-family: sans-serif;
+      flex-direction: column;
     }
     video {
       max-width: 90%;
       border: 3px solid white;
       border-radius: 12px;
+      display: none;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 18px;
+      border: none;
+      border-radius: 8px;
+      background: #0078ff;
+      color: white;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
-  <video id="myVideo" autoplay muted playsinline>
+  <button id="playBtn">▶ Play My Video with Sound</button>
+  <video id="myVideo" playsinline>
     <source src="Character_Speaks_Praveen_Kumar_s_Dialogue.mp4" type="video/mp4">
     Your browser does not support video.
   </video>
 
   <script>
     const video = document.getElementById("myVideo");
+    const playBtn = document.getElementById("playBtn");
 
-    // when the video ends, pause it so it won't replay
+    playBtn.addEventListener("click", () => {
+      playBtn.style.display = "none";   // hide button
+      video.style.display = "block";    // show video
+      video.play();
+    });
+
     video.addEventListener("ended", () => {
-      video.pause();
+      video.pause(); // ensures no replay
     });
   </script>
 </body>
 </html>
+
 
